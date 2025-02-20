@@ -1,0 +1,54 @@
+# Student Grade Management System
+
+# Function to add student data
+def add_student(students, name, grade):
+    students[name] = grade
+
+# Function to display all students
+def display_students(students):
+    print("\nStudent Grades:")
+    for name, grade in students.items():
+        print(f"{name}: {grade}")
+
+# Function to calculate average grade
+def calculate_average(students):
+    if len(students) == 0:
+        return 0
+    return sum(students.values()) / len(students)
+
+# Function to find highest and lowest grades
+def find_highest_lowest(students):
+    if len(students) == 0:
+        return None, None
+    highest = max(students, key=students.get)
+    lowest = min(students, key=students.get)
+    return highest, lowest
+
+# Main program
+students = {}
+
+while True:
+    print("\n1. Add Student\n2. Display Students\n3. Show Class Average\n4. Find Highest & Lowest\n5. Exit")
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        name = input("Enter student name: ")
+        grade = float(input("Enter student grade: "))
+        add_student(students, name, grade)
+    elif choice == "2":
+        display_students(students)
+    elif choice == "3":
+        avg = calculate_average(students)
+        print(f"\nClass Average: {avg:.2f}")
+    elif choice == "4":
+        highest, lowest = find_highest_lowest(students)
+        if highest and lowest:
+            print(f"\nHighest: {highest} ({students[highest]})")
+            print(f"Lowest: {lowest} ({students[lowest]})")
+        else:
+            print("\nNo students in the list.")
+    elif choice == "5":
+        print("Exiting Program. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
